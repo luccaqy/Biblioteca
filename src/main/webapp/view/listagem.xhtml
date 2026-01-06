@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Lista de Livros</title>
+    <!-- Importa o CSS -->
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+</h:head>
+<h:body>
+    <!-- Formulário com a tabela -->
+    <h:form id="formLista">
+        <h2 class="page-title">Lista de livros</h2>
+
+        <!-- Tabela com os dados dos livros -->
+        <h:dataTable value="#{livroBean.livros}" var="livro" border="1">
+            <h:column>
+                <f:facet name="header">Título</f:facet>
+                #{livro.titulo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Autor</f:facet>
+                #{livro.autor}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ano</f:facet>
+                #{livro.ano}
+            </h:column>
+            <h:column>
+                <f:facet name="header">ISBN</f:facet>
+                #{livro.isbn}
+            </h:column>
+            <!-- Coluna de ações com link para excluir -->
+            <h:column>
+                <f:facet name="header">Ações</f:facet>
+                <h:commandLink value="Excluir" action="#{livroBean.excluir(livro.isbn)}">
+                    <f:ajax render="@form" />
+                </h:commandLink>
+            </h:column>
+        </h:dataTable>
+        <!-- Link para voltar ao cadastro -->
+        <a href="cadastro.xhtml">Voltar para cadastro</a>
+    </h:form>
+    <br/>
+</h:body>
+</html>

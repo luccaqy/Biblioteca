@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastro de Livro</title>
+    <!-- Importa o CSS -->
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/style.css" />
+</h:head>
+<h:body>
+    <f:view>
+        <h:form>
+            <h2 class="page-title">Cadastro de Livros</h2>
+
+            <!-- Campos do formulário -->
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Título:" />
+                <h:inputText value="#{livroBean.livro.titulo}" name="titulo" />
+
+                <h:outputLabel value="Autor:" />
+                <h:inputText value="#{livroBean.livro.autor}" name="autor" />
+
+                <h:outputLabel value="Ano:" />
+                <h:inputText id="ano" value="#{livroBean.livro.ano}" name="anoPublicacao" />
+
+                <h:outputLabel value="ISBN:" />
+                <h:inputText value="#{livroBean.livro.isbn}" name="isbn" />
+            </h:panelGrid>
+
+            <!-- Botão de salvar e link para lista -->
+            <h:panelGroup layout="block" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <h:commandButton value="Salvar" action="#{livroBean.salvar}" />
+                <h:outputLink value="listagem.xhtml">Ver lista de livros</h:outputLink>
+            </h:panelGroup>
+
+            <!-- Mensagens de erro para validação -->
+            <h:panelGroup rendered="#{not empty requestScope.erro}">
+                <h:outputText value="#{requestScope.erro}" style="color:red; font-weight:bold;" />
+            </h:panelGroup>
+            <h:message for="ano" style="color:red;" />
+            <h:messages globalOnly="true" style="color:red; font-weight:bold;" />
+        </h:form>
+    </f:view>
+</h:body>
+</html>
